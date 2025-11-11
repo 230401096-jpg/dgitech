@@ -1,0 +1,155 @@
+/* assets/css/style.css */
+/* Reset & base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f8f8;
+}
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header styles */
+.site-header {
+    background-color: #fff;
+    padding: 20px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.site-header .logo a {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #2E6AE0;
+    text-decoration: none;
+}
+.site-header .navbar .nav-list {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+.site-header .navbar .nav-list li a {
+    color: #333;
+    text-decoration: none;
+    padding: 8px 12px;
+    transition: color 0.3s ease;
+}
+.site-header .navbar .nav-list li a:hover {
+    color: #2E6AE0;
+}
+.header-actions .btn {
+    margin-left: 10px;
+}
+
+/* Slider */
+.slider {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 40px;
+}
+.slider .slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+.slider .slide {
+    min-width: 100%;
+    position: relative;
+}
+.slider .slide img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.slider-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+.slider-nav button {
+    background: rgba(0,0,0,0.5);
+    border: none;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.slider-nav button:hover {
+    background: rgba(0,0,0,0.8);
+}
+
+/* Product/Service card hover */
+.card {
+    background: #fff;
+    border: none;
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+}
+.card img {
+    width: 100%;
+    height: auto;
+}
+.card-body {
+    padding: 15px;
+}
+.card-body h5 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: #2E6AE0;
+}
+.card-body p {
+    font-size: 0.9rem;
+    color: #666;
+}
+.card-body .price {
+    margin-top: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #e63946;
+}
+
+/* Footer (basic) */
+.site-footer {
+    background-color: #2E6AE0;
+    color: #fff;
+    padding: 40px 0;
+    margin-top: 60px;
+}
+.site-footer .container {
+    display: flex;
+    justify-content: space-between;
+}
+.site-footer .footer-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+.site-footer .footer-links li a {
+    color: #fff;
+    text-decoration: none;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+.site-footer .footer-links li a:hover {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .site-header .navbar .nav-list {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

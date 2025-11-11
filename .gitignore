@@ -1,0 +1,37 @@
+﻿# Dependency directories
+/vendor/
+/node_modules/
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Log files
+*.log
+logs/
+
+# Session files
+/sess_*
+
+# Cache
+cache/
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Upload files (jangan commit file upload user)
+/uploads/*
+!uploads/.gitkeep
+!uploads/*/.gitkeep
+
+# Database files (hanya structure)
+/database/*.sql
+!/database/dgitech.sql
