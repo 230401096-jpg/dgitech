@@ -10,7 +10,7 @@ if (!isset($_GET['id'])) {
 }
 
 $service_id = intval($_GET['id']);
-$sql = "SELECT s.id, s.title, s.description, s.base_price, u.name as mitra_name
+$sql = "SELECT s.id, s.title, s.description, s.price AS base_price, u.name as mitra_name
         FROM services s
         LEFT JOIN users u ON s.mitra_id = u.id
         WHERE s.id = :sid AND s.is_active = 1";

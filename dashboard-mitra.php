@@ -15,8 +15,7 @@ $stmt = $conn->prepare("SELECT * FROM services WHERE mitra_id = :mid ORDER BY cr
 $stmt->execute([':mid' => $mitraId]);
 $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Ambil produk mitra
-$stmt2 = $conn->prepare("SELECT * FROM products WHERE mita_id = :mid ORDER BY created_at DESC");
+$stmt2 = $conn->prepare("SELECT * FROM products WHERE mitra_id = :mid ORDER BY created_at DESC");
 $stmt2->execute([':mid' => $mitraId]);
 $products = $stmt2->fetchAll(PDO::FETCH_ASSOC);
 
@@ -27,7 +26,7 @@ $products = $stmt2->fetchAll(PDO::FETCH_ASSOC);
     <h3>Layanan Anda</h3>
     <ul>
         <?php foreach ($services as $s): ?>
-            <li><?php echo htmlspecialchars($s['title']); ?> &ndash; Rp <?php echo number_format($s['base_price'],0,',','.'); ?></li>
+            <li><?php echo htmlspecialchars($s['title']); ?> &ndash; Rp <?php echo number_format($s['price'] ?? ($s['base_price'] ?? 0),0,',','.'); ?></li>
         <?php endforeach; ?>
     </ul>
     <h3>Produk Anda</h3>
