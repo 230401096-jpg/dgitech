@@ -25,3 +25,4 @@ if (!empty($result['success'])) {
     echo json_encode($result) . "\n";
     exit(1);
 }
+?>

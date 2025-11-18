@@ -35,8 +35,10 @@ Thumbs.db
 
 # Database files (hanya structure)
 # Abaikan semua .sql di /database kecuali file skema utama `dgitech_schema.sql`
-/database/*.sql
-!/database/dgitech_schema.sql
+/database/*.sql  
+!/database/dgitech_schema.sql  
+!/database/dgitech_db.sql  
+
 
 # Backup SQL di root proyek jangan ikut ter-commit
 backup_before_payments_verification.sql
