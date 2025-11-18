@@ -80,8 +80,27 @@ function analyzeFinances(PDO $pdo = null): array {
         $margin = $income - $expense;
 
         $prompt = "Untuk platform DGITECH: Dalam 30 hari terakhir total pendapatan Rp {$income} dan total biaya Rp {$expense}. Berikan insight bisnis singkat dalam Bahasa Indonesia.";
-        $res = callOpenAI($prompt);
-        if (empty($res['success'])) {
+
+        // retry/backoff untuk panggilan OpenAI
+        $maxAttempts = 3;
+        $attempt = 0;
+        $res = null;
+        require_once __DIR__ . '/logger.php';
+        while ($attempt < $maxAttempts) {
+            $attempt++;
+            dg_log("callOpenAI attempt {$attempt} for prompt length=" . strlen($prompt), 'ai_agent.log');
+            $res = callOpenAI($prompt);
+            if (!empty($res['success'])) {
+                break;
+            }
+            // jika error sementara, tunggu exponential backoff
+            $wait = pow(2, $attempt);
+            dg_log("callOpenAI failed (attempt {$attempt}), waiting {$wait}s: " . json_encode($res), 'ai_agent.log');
+            sleep($wait);
+        }
+
+        if (empty($res) || empty($res['success'])) {
+            dg_log('OpenAI call ultimately failed: ' . json_encode($res), 'ai_agent.log');
             return ['success' => false, 'error' => 'openai_failed', 'details' => $res];
         }
 
