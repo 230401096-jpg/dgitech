@@ -24,8 +24,8 @@
     </footer>
 
     <!-- Vendor JS -->
-    <script src="/assets/vendor/jquery/jquery.min.js"></script>
-    <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-3fp9Y+3k5mG6k2b1YhJqzVQm7bQm6j5J5Z5G5G5G=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+9o5F5z5Y5Y5f" crossorigin="anonymous"></script>
     <!-- Custom JS -->
     <script src="/assets/js/main.js"></script>
 </body>

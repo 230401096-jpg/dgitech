@@ -46,11 +46,20 @@
 </head>
 <body>
     <div class="container">
-        <h1>🚀 DgiTech Platform</h1>
+        <?php
+        // role-aware index: show different content depending on login state
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
-        <p class="lead">Selamat datang di repo DGITECH — ringkasan halaman dan API yang tersedia di proyek ini.</p>
+        $isLoggedIn = isset($_SESSION['user_id']);
+        $role = $isLoggedIn ? ($_SESSION['user_role'] ?? 'customer') : null;
+        ?>
 
-        <div class="status">
+        <div class="hero">
+            <h1>🚀 DgiTech Platform</h1>
+            <p class="lead">Platform penjualan produk & layanan — modern, cepat, dan mudah diperluas.</p>
+        </div>
+
+        <div class="status" style="margin-top:12px;">
             <strong>Status:</strong> 🟢 Development Mode
         </div>
 
@@ -92,6 +101,28 @@
                 <li><code>scripts/</code> — utilitas (seed, runner)</li>
             </ul>
         </section>
+
+        <?php if ($isLoggedIn): ?>
+            <div class="card" style="margin-top:16px;">
+                <h4>Selamat datang, <?php echo htmlspecialchars($_SESSION['user_name'] ?? 'Pengguna'); ?></h4>
+                <p>Role Anda: <strong><?php echo htmlspecialchars($role); ?></strong></p>
+                <p>
+                    <?php if ($role === 'admin'): ?>
+                        <a href="/dashboard-admin.php" class="btn btn-primary">Buka Admin Dashboard</a>
+                    <?php elseif ($role === 'mitra'): ?>
+                        <a href="/dashboard-mitra.php" class="btn btn-primary">Buka Mitra Dashboard</a>
+                    <?php else: ?>
+                        <a href="/dashboard-customer.php" class="btn btn-primary">Buka Dashboard Anda</a>
+                    <?php endif; ?>
+                    <a href="/logout.php" class="btn btn-outline-secondary">Logout</a>
+                </p>
+            </div>
+        <?php else: ?>
+            <div class="card" style="margin-top:16px;">
+                <h4>Belum login?</h4>
+                <p>Silakan <a href="/login.php">masuk</a> atau <a href="/register.php">daftar</a> untuk mengakses fitur penuh.</p>
+            </div>
+        <?php endif; ?>
 
         <p style="margin-top:1rem"><strong>Tip:</strong> Jalankan server lokal dengan <code>php -S 0.0.0.0:8000 -t /workspaces/dgitech</code> lalu buka <a href="http://localhost:8000">http://localhost:8000</a></p>
     </div>

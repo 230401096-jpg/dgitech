@@ -1,0 +1,5 @@
+/* Minimal responsive helpers */
+@media (max-width: 768px) {
+  .container { padding: 0.5rem }
+  .nav-list { display:none }
+}

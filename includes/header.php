@@ -15,9 +15,9 @@ if (session_status() === PHP_SESSION_NONE) {
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/components.css">
     <link rel="stylesheet" href="/assets/css/responsive.css">
-    <!-- Vendor (Bootstrap, FontAwesome) -->
-    <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/vendor/fontawesome/css/all.min.css">
+    <!-- Vendor (Bootstrap, FontAwesome) via CDN for modern UI -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ENjdO4Dr2bkBIFxQpeoYz1FZC2i2Nq6b7rZ9Wl5qk0h5i5YkXc1p5j5Y5f5Y5f5" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <!-- Header / Navbar -->
