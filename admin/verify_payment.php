@@ -24,7 +24,7 @@ if ($payment_id <= 0 || !in_array($action, ['approve', 'reject'], true)) {
 }
 
 try {
-    $stmt = $conn->prepare('SELECT id, status FROM payments WHERE id = ? FOR UPDATE');
+    $stmt = $conn->prepare('SELECT p.id, p.status, p.user_id, p.reference, p.amount, u.email AS user_email FROM payments p LEFT JOIN users u ON p.user_id = u.id WHERE p.id = ? FOR UPDATE');
     $stmt->execute([$payment_id]);
     $payment = $stmt->fetch(PDO::FETCH_ASSOC);
     if (!$payment) {
@@ -40,8 +40,31 @@ try {
     $newStatus = $action === 'approve' ? 'paid' : 'failed';
     $adminId = isset($_SESSION['user_id']) ? (int)$_SESSION['user_id'] : null;
 
+    // Update payment status
     $update = $conn->prepare('UPDATE payments SET `status` = ?, verified_by = ?, verified_at = NOW() WHERE id = ?');
     $update->execute([$newStatus, $adminId, $payment_id]);
+
+    // Insert audit record
+    $audit = $conn->prepare('INSERT INTO payment_audit (payment_id, admin_id, action, note) VALUES (?, ?, ?, ?)');
+    $note = isset($body['note']) ? substr(trim($body['note']),0,255) : null;
+    $audit->execute([$payment_id, $adminId, $action, $note]);
+
+    // Send email notification to user if email available
+    if (!empty($payment['user_email'])) {
+        $to = $payment['user_email'];
+        $subject = $newStatus === 'paid' ? 'Pembayaran Anda telah diverifikasi' : 'Pembayaran Anda ditolak';
+        $message = "Halo,\n\nStatus pembayaran dengan referensi: {$payment['reference']} sebesar Rp {$payment['amount']} telah diubah menjadi: {$newStatus}.\n\n";
+        if ($note) {
+            $message .= "Catatan: {$note}\n\n";
+        }
+        $message .= "Jika ada pertanyaan, hubungi tim kami.\n\nTerima kasih.";
+        $headers = 'From: no-reply@' . ($_SERVER['SERVER_NAME'] ?? 'localhost') . "\r\n" . 'Content-Type: text/plain; charset=utf-8';
+        try {
+            @mail($to, $subject, $message, $headers);
+        } catch (Exception $mailEx) {
+            error_log('mail error: ' . $mailEx->getMessage());
+        }
+    }
 
     echo json_encode(['success' => true, 'status' => $newStatus]);
 } catch (Exception $e) {

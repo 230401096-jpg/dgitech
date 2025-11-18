@@ -137,6 +137,20 @@ CREATE TABLE IF NOT EXISTS `ai_insights` (
   `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- payment audit (admin actions for payments)
+CREATE TABLE IF NOT EXISTS `payment_audit` (
+  `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `payment_id` INT UNSIGNED NOT NULL,
+  `admin_id` INT UNSIGNED DEFAULT NULL,
+  `action` ENUM('approve','reject') NOT NULL,
+  `note` VARCHAR(255) DEFAULT NULL,
+  `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  INDEX (`payment_id`),
+  INDEX (`admin_id`),
+  CONSTRAINT `fk_payment_audit_payment` FOREIGN KEY (`payment_id`) REFERENCES `payments`(`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_payment_audit_admin` FOREIGN KEY (`admin_id`) REFERENCES `users`(`id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 SET FOREIGN_KEY_CHECKS = 1;
 
 -- End of schema
