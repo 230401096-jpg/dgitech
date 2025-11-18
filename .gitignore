@@ -31,6 +31,7 @@ Thumbs.db
 /uploads/*
 !uploads/.gitkeep
 !uploads/*/.gitkeep
+!uploads/payments/
 
 # Database files (hanya structure)
 # Abaikan semua .sql di /database kecuali file skema utama `dgitech_schema.sql`

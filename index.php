@@ -47,27 +47,53 @@
 <body>
     <div class="container">
         <h1>🚀 DgiTech Platform</h1>
-        
+
+        <p class="lead">Selamat datang di repo DGITECH — ringkasan halaman dan API yang tersedia di proyek ini.</p>
+
         <div class="status">
             <strong>Status:</strong> 🟢 Development Mode
         </div>
-        
-        <div class="status">
-            <strong>Location:</strong> C:\Users\UMRI\Documents\dgitech\
-        </div>
-        
-        <div class="team-list">
-            <h3>👥 Development Team:</h3>
+
+        <section style="margin-top:1rem;text-align:left">
+            <h3>Halaman Utama</h3>
             <ul>
-                <li>Mhd. Qadri - Team Leader & Integrator</li>
-                <li>sukri hamdi - Backend Dev A</li>
-                <li>dion - Backend Dev B</li>
-                <li>andhika - Frontend Dev A</li>
-                <li>septian zalukhu - Frontend Dev B</li>
+                <li><a href="/shop.php">Shop</a> — Daftar produk</li>
+                <li><a href="/services.php">Services</a> — Daftar layanan mitra</li>
+                <li><a href="/cart.php">Cart</a> — Keranjang</li>
+                <li><a href="/checkout.php">Checkout</a></li>
+                <li><a href="/payment.php">Payment</a> — Upload bukti pembayaran</li>
+                <li><a href="/dashboard-admin.php">Admin Dashboard</a></li>
+                <li><a href="/dashboard-customer.php">Customer Dashboard</a></li>
+                <li><a href="/dashboard-mitra.php">Mitra Dashboard</a></li>
+                <li><a href="/login.php">Login</a> / <a href="/register.php">Register</a></li>
+                <li><a href="/about.php">About</a> / <a href="/contact.php">Contact</a></li>
             </ul>
-        </div>
-        
-        <p><strong>📅 Started:</strong> Tuesday, November 11, 2025</p>
+        </section>
+
+        <section style="margin-top:1rem;text-align:left">
+            <h3>API Endpoints</h3>
+            <ul>
+                <li><code>/api/get-products.php</code></li>
+                <li><code>/api/create-order.php</code></li>
+                <li><code>/api/get-orders.php</code></li>
+                <li><code>/api/get-services.php</code></li>
+                <li><code>/api/get-payments-pending.php</code></li>
+            </ul>
+        </section>
+
+        <section style="margin-top:1rem;text-align:left">
+            <h3>Repository</h3>
+            <ul>
+                <li><code>includes/</code> — konfigurasi, helper, AI agent</li>
+                <li><code>database/dgitech_schema.sql</code> — file schema utama</li>
+                <li><code>assets/</code> — CSS, images, vendor</li>
+                <li><code>admin/</code> — halaman admin (verifikasi, audit)</li>
+                <li><code>api/</code> — API endpoints</li>
+                <li><code>scripts/</code> — utilitas (seed, runner)</li>
+            </ul>
+        </section>
+
+        <p style="margin-top:1rem"><strong>Tip:</strong> Jalankan server lokal dengan <code>php -S 0.0.0.0:8000 -t /workspaces/dgitech</code> lalu buka <a href="http://localhost:8000">http://localhost:8000</a></p>
     </div>
 </body>
 </html>
