@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: dgitech-mailhog
+    ports:
+      - "1025:1025"   # SMTP
+      - "8025:8025"   # Web UI
+    restart: unless-stopped
+
+# Usage:
+# 1. Start MailHog: docker compose -f docker-compose.mailhog.yml up -d
+# 2. Configure SMTP in .env: SMTP_HOST=127.0.0.1 SMTP_PORT=1025
+# 3. Open web UI: http://localhost:8025 to inspect messages
